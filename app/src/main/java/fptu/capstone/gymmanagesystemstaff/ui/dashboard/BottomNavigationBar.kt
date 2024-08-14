@@ -19,12 +19,12 @@ import fptu.capstone.gymmanagesystemstaff.viewmodel.AuthViewModel
 fun BottomNavigationBar(navController: NavHostController, authViewModel: AuthViewModel = hiltViewModel()) {
     val isLoggedIn by authViewModel.isLoggedIn.collectAsState()
     val items = if(isLoggedIn) listOf(
-//        BottomNavItem.Home,
+        BottomNavItem.Home,
 //        BottomNavItem.Class,
-        BottomNavItem.Attendance,
+//        BottomNavItem.Attendance,
         BottomNavItem.Profile,
     ) else listOf(
-        BottomNavItem.Home,
+//        BottomNavItem.Home,
         BottomNavItem.Profile,
     )
     NavigationBar {
@@ -35,7 +35,7 @@ fun BottomNavigationBar(navController: NavHostController, authViewModel: AuthVie
 //                modifier = Modifier.background(color = MaterialTheme.colorScheme.primary),
                 icon = {Icon(painterResource(id = item.icon), contentDescription = item.title)},
                 label = { Text(item.title) },
-                selected = currentRoute?.startsWith(item.route) == true,
+                selected = if (currentRoute?.startsWith(item.route) == true) true else navBackStackEntry?.destination?.parent?.route == item.route,
                 onClick = {
                     navController.navigate(item.route) {
                         // Pop up to the start destination of the graph to

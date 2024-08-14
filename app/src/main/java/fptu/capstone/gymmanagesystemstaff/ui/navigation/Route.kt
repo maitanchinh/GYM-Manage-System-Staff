@@ -18,5 +18,6 @@ sealed class Route(val route: String) {
             return "classDetail/$id"
         }
     }
-    object Attendance : Route("attendance")
+    object Attendance : Route("home/attendance")
+    object Checkin : Route("home/checkin")
 }

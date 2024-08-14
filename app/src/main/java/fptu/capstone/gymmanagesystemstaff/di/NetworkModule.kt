@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import fptu.capstone.gymmanagesystemstaff.network.AttendanceApiService
 import fptu.capstone.gymmanagesystemstaff.network.AuthApiService
+import fptu.capstone.gymmanagesystemstaff.network.CheckinApiService
 import fptu.capstone.gymmanagesystemstaff.network.ClassApiService
 import fptu.capstone.gymmanagesystemstaff.network.UserApiService
 import fptu.capstone.gymmanagesystemstaff.utils.SessionManager
@@ -80,5 +81,11 @@ object NetworkModule {
     @Provides
     fun provideAttendanceApiService(retrofit: Retrofit): AttendanceApiService {
         return retrofit.create(AttendanceApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCheckinApiService(retrofit: Retrofit): CheckinApiService {
+        return retrofit.create(CheckinApiService::class.java)
     }
 }

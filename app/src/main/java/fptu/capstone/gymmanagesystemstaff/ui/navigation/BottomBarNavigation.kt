@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import fptu.capstone.gymmanagesystemstaff.ui.attendance.AttendanceScreen
+import fptu.capstone.gymmanagesystemstaff.ui.checkin.CheckinScreen
 import fptu.capstone.gymmanagesystemstaff.ui.gymclass.AllClassScreen
 import fptu.capstone.gymmanagesystemstaff.ui.gymclass.ClassScreen
 import fptu.capstone.gymmanagesystemstaff.ui.gymclass.detail.ClassDetailScreen
@@ -32,11 +33,14 @@ fun BottomBarNavigation(
     val authState by authViewModel.authState.collectAsState()
     NavHost(
         navController = navController,
-        startDestination = if (isLoggedIn) BottomNavItem.Attendance.route else BottomNavItem.Home.route,
+        startDestination = if (!isLoggedIn) BottomNavItem.Profile.route else BottomNavItem.Home.route,
         modifier = modifier,
         route = BOTTOM_BAR_ROUTE
     ) {
-        composable(BottomNavItem.Home.route) { HomeScreen() }
+        composable(BottomNavItem.Home.route) { HomeScreen(
+            onCheckInClick = { navController.navigate(Route.Checkin.route) },
+            onTrainerAttendanceClick = { navController.navigate(Route.Attendance.route) }
+        ) }
         composable(BottomNavItem.Profile.route) {
             if (isLoggedIn) {
                 ProfileScreen(onProfileDetailClick = { id ->
@@ -78,6 +82,8 @@ fun BottomBarNavigation(
         composable(Route.Attendance.route) {
             AttendanceScreen()
         }
-
+        composable(Route.Checkin.route) {
+            CheckinScreen()
+        }
     }
 }
