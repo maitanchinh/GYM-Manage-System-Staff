@@ -15,5 +15,8 @@ data class FilterRequestBody(
     @SerializedName("categoryId") var categoryId: String? = null,
     @SerializedName("orderBy") var orderBy: String? = null,
     @SerializedName("isAscending") var isAscending: Boolean? = null,
-    @SerializedName("pagination") var pagination: Pagination? = Pagination()
+    @SerializedName("pagination") var pagination: Pagination? = Pagination(),
+    @SerializedName("maintainId") var maintainId: String? = null,
+    @SerializedName("staffId") var staffId: String? = null,
+    @SerializedName("equipmentId") var equipmentId: String? = null,
 )

@@ -20,4 +20,26 @@ sealed class Route(val route: String) {
     }
     object Attendance : Route("home/attendance")
     object Checkin : Route("home/checkin")
+    object Maintenance : Route("maintenance")
+    object Maintain : Route("maintenance/maintain/{id}"){
+        fun createRouteWithId(id: String): String {
+            return "maintenance/maintain/$id"
+        }
+    }
+    object ResultDetail : Route("maintenance/resultDetail/{id}"){
+        fun createRouteWithId(id: String): String {
+            return "maintenance/resultDetail/$id"
+        }
+    }
+    object AddMaintain : Route("maintenance/addMaintain")
+    object AddPickup : Route("maintenance/addPickup/{id}"){
+        fun createRouteWithId(id: String): String {
+            return "maintenance/addPickup/$id"
+        }
+    }
+    object AddResult : Route("maintenance/addResult/{id}"){
+        fun createRouteWithId(id: String): String {
+            return "maintenance/addResult/$id"
+        }
+    }
 }
