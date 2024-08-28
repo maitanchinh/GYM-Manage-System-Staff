@@ -12,6 +12,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import fptu.capstone.gymmanagesystemstaff.ui.attendance.AttendanceScreen
 import fptu.capstone.gymmanagesystemstaff.ui.checkin.CheckinScreen
+import fptu.capstone.gymmanagesystemstaff.ui.equipment.SlotEquipmentDetailScreen
+import fptu.capstone.gymmanagesystemstaff.ui.equipment.SlotEquipmentScreen
 import fptu.capstone.gymmanagesystemstaff.ui.gymclass.AllClassScreen
 import fptu.capstone.gymmanagesystemstaff.ui.gymclass.ClassScreen
 import fptu.capstone.gymmanagesystemstaff.ui.gymclass.detail.ClassDetailScreen
@@ -142,6 +144,14 @@ fun BottomBarNavigation(
                 navController.popBackStack()
             })
         }
-
+        composable(Route.SlotEquipment.route) {
+            SlotEquipmentScreen(onDetailClick = { id ->
+                navController.navigate(Route.SlotEquipmentDetail.createRouteWithId(id))
+            })
+        }
+        composable(Route.SlotEquipmentDetail.route) { backStackEntry ->
+            val equipmentId = backStackEntry.arguments?.getString("id")
+             SlotEquipmentDetailScreen(slotEquipmentId = equipmentId!!)
+        }
     }
 }

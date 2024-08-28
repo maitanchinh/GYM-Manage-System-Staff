@@ -8,6 +8,7 @@ data class FilterRequestBody(
     @SerializedName("trainerId") var trainerId: String? = null,
     @SerializedName("classId") var classId: String? = null,
     @SerializedName("courseId") var courseId: String? = null,
+    @SerializedName("slotId") var slotId: String? = null,
     @SerializedName("status") var status: String? = null,
     @SerializedName("date") var date: String? = null,
     @SerializedName("from") var from: String? = null,

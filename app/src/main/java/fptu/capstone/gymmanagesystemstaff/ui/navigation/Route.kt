@@ -42,4 +42,10 @@ sealed class Route(val route: String) {
             return "maintenance/addResult/$id"
         }
     }
+    object SlotEquipment : Route("equipment")
+    object SlotEquipmentDetail : Route("equipment/equipmentDetail/{id}"){
+        fun createRouteWithId(id: String): String {
+            return "equipment/equipmentDetail/$id"
+        }
+    }
 }

@@ -12,6 +12,7 @@ import fptu.capstone.gymmanagesystemstaff.network.AttendanceApiService
 import fptu.capstone.gymmanagesystemstaff.network.AuthApiService
 import fptu.capstone.gymmanagesystemstaff.network.CheckinApiService
 import fptu.capstone.gymmanagesystemstaff.network.ClassApiService
+import fptu.capstone.gymmanagesystemstaff.network.EquipmentApiService
 import fptu.capstone.gymmanagesystemstaff.network.MaintenanceApiService
 import fptu.capstone.gymmanagesystemstaff.network.UserApiService
 import fptu.capstone.gymmanagesystemstaff.utils.RequiresAuth
@@ -131,5 +132,11 @@ object NetworkModule {
     @Provides
     fun provideMaintenanceApiService(retrofit: Retrofit): MaintenanceApiService {
         return retrofit.create(MaintenanceApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideEquipmentApiService(retrofit: Retrofit): EquipmentApiService {
+        return retrofit.create(EquipmentApiService::class.java)
     }
 }

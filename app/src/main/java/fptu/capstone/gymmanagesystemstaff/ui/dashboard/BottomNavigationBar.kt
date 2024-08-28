@@ -23,6 +23,7 @@ fun BottomNavigationBar(navController: NavHostController, authViewModel: AuthVie
     val items = if(isLoggedIn) listOf(
         BottomNavItem.Home,
         BottomNavItem.Maintenance,
+        BottomNavItem.Equipment,
 //        BottomNavItem.Class,
 //        BottomNavItem.Attendance,
         BottomNavItem.Profile,
