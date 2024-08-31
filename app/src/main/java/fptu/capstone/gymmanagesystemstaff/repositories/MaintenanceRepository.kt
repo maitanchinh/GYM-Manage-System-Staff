@@ -33,7 +33,7 @@ class MaintenanceRepository @Inject constructor(private val maintenanceApiServic
         }
         return maintenanceApiService.addMaintainPickup(maintainIdBody, imagePart)
     }
-    suspend fun addMaintainResult(maintainId: String, image: File, date: String, cost: Double, invoiceImage: File?) : MaintainResult {
+    suspend fun addMaintainResult(maintainId: String, image: File, date: String, cost: Double, invoiceImage: File?, isFixed: Boolean) : MaintainResult {
         val maintainIdBody = maintainId.toRequestBody("text/plain".toMediaTypeOrNull())
         val dateBody = date.toRequestBody("text/plain".toMediaTypeOrNull())
         val imagePart = image.let {
@@ -44,7 +44,7 @@ class MaintenanceRepository @Inject constructor(private val maintenanceApiServic
             val requestFile = it.asRequestBody("image/*".toMediaTypeOrNull())
             MultipartBody.Part.createFormData("invoiceImage", it.name, requestFile)
         }
-        return maintenanceApiService.addMaintainResult(maintainId = maintainIdBody, image = imagePart, date = dateBody, cost = cost, invoiceImage = invoiceImagePart)
+        return maintenanceApiService.addMaintainResult(maintainId = maintainIdBody, image = imagePart, date = dateBody, cost = cost, invoiceImage = invoiceImagePart, isFixed = isFixed)
     }
     suspend fun deleteMaintainResult(id: String) = maintenanceApiService.deleteMaintainResult(id)
     suspend fun deleteMaintainPickup(id: String) = maintenanceApiService.deleteMaintainPickup(id)

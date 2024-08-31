@@ -26,6 +26,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import fptu.capstone.gymmanagesystemstaff.R
 import fptu.capstone.gymmanagesystemstaff.model.MaintainResult
+import fptu.capstone.gymmanagesystemstaff.ui.theme.ForestGreen
 import fptu.capstone.gymmanagesystemstaff.utils.parseDateTime
 import java.time.format.DateTimeFormatter
 
@@ -51,14 +52,27 @@ fun ResultItem(
                 contentScale = ContentScale.Crop
             )
             Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-                result.date?.let { parseDateTime(it) }
-                    ?.let {
-                        Text(
-                            modifier = Modifier.padding(16.dp),
-                            text = it.format(DateTimeFormatter.ofPattern("HH:mm, dd/MM/yyyy")),
-                            style = MaterialTheme.typography.bodyLarge
-                        )
-                    }
+               Column {
+                   Text(
+                       modifier = Modifier.padding(16.dp),
+                       text = result.status!!,
+                       style = MaterialTheme.typography.bodyLarge,
+                          color = if (result.status != "Failed" ) ForestGreen else MaterialTheme.colorScheme.error
+                   )
+                   Text(
+                       modifier = Modifier.padding(16.dp),
+                       text = "Cost: ${result.cost} VND",
+                       style = MaterialTheme.typography.bodyLarge
+                   )
+                   result.date?.let { parseDateTime(it) }
+                       ?.let {
+                           Text(
+                               modifier = Modifier.padding(16.dp),
+                               text = it.format(DateTimeFormatter.ofPattern("HH:mm, dd/MM/yyyy")),
+                               style = MaterialTheme.typography.bodyLarge
+                           )
+                       }
+               }
                 Box(
                     modifier = Modifier
                         .padding(16.dp)

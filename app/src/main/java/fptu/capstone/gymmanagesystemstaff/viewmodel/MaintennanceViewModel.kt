@@ -51,6 +51,8 @@ class MaintennanceViewModel @Inject constructor(private val maintenanceRepositor
     val date : StateFlow<String> = _date
     private val _cost = MutableStateFlow<String?>(null)
     val cost : StateFlow<String?> = _cost
+    private val _fixedStatus = MutableStateFlow<Boolean?>(null)
+    val fixedStatus : StateFlow<Boolean?> = _fixedStatus
 
     fun setPickupImage(image: File?) {
         _pickupImage.value = image
@@ -82,6 +84,11 @@ class MaintennanceViewModel @Inject constructor(private val maintenanceRepositor
 
     fun onCostChange(cost: String) {
         _cost.value = cost
+    }
+
+    fun setFixedStatus(fixedStatus: Boolean) {
+        _fixedStatus.value = fixedStatus
+        println(_fixedStatus.value)
     }
 
     fun fetchMaintains(filterRequestBody: FilterRequestBody){
@@ -171,7 +178,7 @@ class MaintennanceViewModel @Inject constructor(private val maintenanceRepositor
         viewModelScope.launch {
             _result.value = DataState.Loading
             try {
-                val response: MaintainResult = maintenanceRepository.addMaintainResult(maintainId = maintainId, image = _resultImage.value!!, date = _date.value, cost = _cost.value!!.toDouble(), invoiceImage = _invoiceImage.value)
+                val response: MaintainResult = maintenanceRepository.addMaintainResult(maintainId = maintainId, image = _resultImage.value!!, date = _date.value, cost = _cost.value!!.toDouble(), invoiceImage = _invoiceImage.value, isFixed = _fixedStatus.value!!)
                 _result.value = DataState.Success(response)
             } catch (e: HttpException) {
                 println(e)

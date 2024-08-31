@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -86,6 +87,9 @@ fun AddResultScreen(
     var showSelectInvoiceImageDialog by remember { mutableStateOf(false) }
     var resultImagePath by remember { mutableStateOf<File?>(null) }
     var invoiceImagePath by remember { mutableStateOf<File?>(null) }
+    val fixedStatusOption = listOf("Fixed", "Unfixable")
+    val fixedStatus by maintennanceViewModel.fixedStatus.collectAsState()
+    var expanded by remember { mutableStateOf(false) }
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
     val galleryPermissionState = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         rememberPermissionState(permission = Manifest.permission.READ_MEDIA_IMAGES)
@@ -258,6 +262,47 @@ fun AddResultScreen(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .clip(RoundedCornerShape(16.dp))
+                .background(color = Color.White)
+                .border(
+                    width = 1.dp,
+                    color = Color.Gray,
+                    shape = RoundedCornerShape(16.dp)
+                )
+                .clickable {
+                    expanded = true
+                }, contentAlignment = Alignment.CenterStart
+        ) {
+            Text(
+                modifier = Modifier.padding(16.dp),
+                text = if (fixedStatus != null) fixedStatusOption[if (fixedStatus!!) 0 else 1] else "Choose status",
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            DropdownMenu(
+                modifier = Modifier
+                    .background(color = MaterialTheme.colorScheme.secondaryContainer)
+                    .padding(16.dp)
+                    .clip(shape = RoundedCornerShape(16.dp)),
+                expanded = expanded,
+                onDismissRequest = { expanded = false }) {
+                fixedStatusOption.forEach { option ->
+                    Text(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .clickable {
+                                maintennanceViewModel.setFixedStatus(option == "Fixed")
+                                expanded = false
+                            },
+                        text = option
+                    )
+                }
+
+            }
+        }
+        Gap.k16.Height()
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
                 .aspectRatio(16f / 9f)
                 .clip(shape = RoundedCornerShape(32.dp))
                 .background(color = MaterialTheme.colorScheme.secondaryContainer)
@@ -296,7 +341,7 @@ fun AddResultScreen(
         LargeButton(
             text = "Save",
             isLoading = resultState is DataState.Loading,
-            enabled = date.isNotEmpty() && cost != null && resultImage != null
+            enabled = date.isNotEmpty() && cost != null && resultImage != null && fixedStatus != null,
         ) {
             maintennanceViewModel.addMaintainResult(maintainId)
 

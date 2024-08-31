@@ -55,6 +55,7 @@ interface MaintenanceApiService {
         @Part("date") date: RequestBody,
         @Part("cost") cost: Double,
         @Part invoiceImage: MultipartBody.Part?,
+        @Part("isFixed") isFixed: Boolean,
     ): MaintainResult
 
     @RequiresAuth

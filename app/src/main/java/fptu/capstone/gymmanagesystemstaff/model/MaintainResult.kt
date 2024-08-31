@@ -9,6 +9,7 @@ data class MaintainResult(
     @SerializedName("image"        ) var image        : String? = null,
     @SerializedName("cost"         ) var cost         : Int?    = null,
     @SerializedName("invoiceImage" ) var invoiceImage : String? = null,
+    @SerializedName("isFixed"      ) var isFixed      : Boolean? = null,
     @SerializedName("status"       ) var status       : String? = null,
     @SerializedName("createAt"     ) var createAt     : String? = null
 )
