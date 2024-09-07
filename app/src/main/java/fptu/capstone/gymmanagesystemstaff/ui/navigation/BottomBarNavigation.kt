@@ -19,7 +19,6 @@ import fptu.capstone.gymmanagesystemstaff.ui.gymclass.ClassScreen
 import fptu.capstone.gymmanagesystemstaff.ui.gymclass.detail.ClassDetailScreen
 import fptu.capstone.gymmanagesystemstaff.ui.home.HomeScreen
 import fptu.capstone.gymmanagesystemstaff.ui.login.LoginScreen
-import fptu.capstone.gymmanagesystemstaff.ui.maintenance.AddMaintainScreen
 import fptu.capstone.gymmanagesystemstaff.ui.maintenance.AddPickupScreen
 import fptu.capstone.gymmanagesystemstaff.ui.maintenance.AddResultScreen
 import fptu.capstone.gymmanagesystemstaff.ui.maintenance.Maintain
@@ -103,7 +102,6 @@ fun BottomBarNavigation(
                 onMaintainClick = { id ->
                     navController.navigate(Route.Maintain.createRouteWithId(id))
                 },
-                onAddClick = { navController.navigate(Route.AddMaintain.route) }
             )
         }
         composable(Route.Maintain.route) { backStackEntry ->
@@ -130,9 +128,6 @@ fun BottomBarNavigation(
         composable(Route.ResultDetail.route) { backStackEntry ->
             val resultId = backStackEntry.arguments?.getString("id")
             ResultDetailScreen(resultId = resultId!!)
-        }
-        composable(Route.AddMaintain.route) {
-            AddMaintainScreen()
         }
         composable(Route.AddPickup.route) { backStackEntry ->
             val maintainId = backStackEntry.arguments?.getString("id")

@@ -1,7 +1,6 @@
 package fptu.capstone.gymmanagesystemstaff.ui.profile
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExitToApp
-import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -84,36 +82,36 @@ fun ProfileScreen(
             contentAlignment = Alignment.Center
         ) {
             Column {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { onProfileDetailClick(user.id!!) },
-                    horizontalArrangement = Arrangement.Start,
-                    verticalAlignment = Alignment.CenterVertically,
-
-                ) {
-                    Icon(imageVector = Icons.Rounded.Person, contentDescription = null)
-                    Spacer(modifier = Modifier.padding(start = 32.dp))
-                    Text(
-                        "Profile Details"
-                    )
-                }
-                Spacer(modifier = Modifier.padding(8.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Start,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_payment_2),
-                        contentDescription = null
-                    )
-                    Spacer(modifier = Modifier.padding(start = 32.dp))
-                    Text(
-                        "Billing",
-                    )
-                }
-                Spacer(modifier = Modifier.padding(8.dp))
+//                Row(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .clickable { onProfileDetailClick(user.id!!) },
+//                    horizontalArrangement = Arrangement.Start,
+//                    verticalAlignment = Alignment.CenterVertically,
+//
+//                ) {
+//                    Icon(imageVector = Icons.Rounded.Person, contentDescription = null)
+//                    Spacer(modifier = Modifier.padding(start = 32.dp))
+//                    Text(
+//                        "Profile Details"
+//                    )
+//                }
+//                Spacer(modifier = Modifier.padding(8.dp))
+//                Row(
+//                    modifier = Modifier.fillMaxWidth(),
+//                    horizontalArrangement = Arrangement.Start,
+//                    verticalAlignment = Alignment.CenterVertically
+//                ) {
+//                    Icon(
+//                        painter = painterResource(id = R.drawable.baseline_payment_2),
+//                        contentDescription = null
+//                    )
+//                    Spacer(modifier = Modifier.padding(start = 32.dp))
+//                    Text(
+//                        "Billing",
+//                    )
+//                }
+//                Spacer(modifier = Modifier.padding(8.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Start,
