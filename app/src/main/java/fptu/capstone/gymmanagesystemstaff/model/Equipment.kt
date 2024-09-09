@@ -13,6 +13,7 @@ data class Equipment(
 data class SlotEquipment(
     @SerializedName("id"        ) var id        : String?    = null,
     @SerializedName("status"    ) var status    : String?    = null,
+    @SerializedName("reason"    ) var reason    : String?    = null,
     @SerializedName("createAt"  ) var createAt  : String?    = null,
     @SerializedName("updateAt"  ) var updateAt  : String?    = null,
     @SerializedName("creator"   ) var creator   : Trainer?   = Trainer(),

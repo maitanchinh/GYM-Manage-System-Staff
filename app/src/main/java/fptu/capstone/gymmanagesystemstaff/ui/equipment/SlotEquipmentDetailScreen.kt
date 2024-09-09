@@ -84,7 +84,7 @@ fun SlotEquipmentDetailScreen(
             val slotEquipment = (slotEquipmentState as DataState.Success).data
             Scaffold(
                 floatingActionButton = {
-                    if (slotEquipment.status == "Accept repay") return@Scaffold else Row(
+                    if (slotEquipment.status!!.contains("Accept") || slotEquipment.status!!.contains("Reject")) return@Scaffold else Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(start = 32.dp)
@@ -109,7 +109,11 @@ fun SlotEquipmentDetailScreen(
                             isAlter = true
                         ) {
                             if (rejectReason.isEmpty()) {
-                                Toast.makeText(context, "Please enter reject reason", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Please enter reject reason",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             } else {
                                 if (slotEquipment.status!!.lowercase().contains("borrow")) {
                                     equipmentViewModel.rejectBorrow(slotEquipmentId, rejectReason)
@@ -269,8 +273,34 @@ fun SlotEquipmentDetailScreen(
                                 }, style = MaterialTheme.typography.bodyMedium)
                             }
                         }
-                        Gap.k16.Height()
-                        TextField(modifier = Modifier.fillMaxWidth(), onTextChange = { rejectReason = it }, label = "Reject reason", value = rejectReason, maxLines = 5)
+                        if (!slotEquipment.status!!.contains("Accept") && !slotEquipment.status!!.contains("Reject")
+                        ) {
+
+                            Gap.k16.Height()
+                            TextField(
+                                modifier = Modifier.fillMaxWidth(),
+                                onTextChange = { rejectReason = it },
+                                label = "Reject reason",
+                                value = rejectReason,
+                                maxLines = 5
+                            )
+                        }
+                        if (slotEquipment.status!!.contains("Reject")) {
+                            Gap.k16.Height()
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clip(shape = RoundedCornerShape(16.dp))
+                                    .background(color = MaterialTheme.colorScheme.error)
+                                    .padding(16.dp)
+                            ) {
+                                Text(
+                                    text = "Reject reason: ${slotEquipment.reason}",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = Color.White
+                                )
+                            }
+                        }
                     }
                 })
         }

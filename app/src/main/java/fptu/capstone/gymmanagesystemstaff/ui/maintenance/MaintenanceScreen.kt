@@ -76,6 +76,7 @@ fun MaintenanceScreen(
     LaunchedEffect(Unit) {
         maintennanceViewModel.fetchMaintains(FilterRequestBody(staffId = profileViewModel.getUser()!!.id))
         equipmentViewModel.fetchEquipments(FilterRequestBody())
+        maintennanceViewModel.resetAddMaintain()
     }
     LaunchedEffect(searchText) {
         maintennanceViewModel.fetchMaintains(
@@ -100,6 +101,7 @@ fun MaintenanceScreen(
                 Toast.LENGTH_SHORT
             ).show()
         }
+        maintennanceViewModel.resetAddMaintain()
     }
     Scaffold(
         floatingActionButton = {

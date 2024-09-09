@@ -91,6 +91,10 @@ class MaintennanceViewModel @Inject constructor(private val maintenanceRepositor
         println(_fixedStatus.value)
     }
 
+    fun resetAddMaintain() {
+        _addMaintain.value = DataState.Idle
+    }
+
     fun fetchMaintains(filterRequestBody: FilterRequestBody){
         viewModelScope.launch {
             _maintains.value = DataState.Loading
