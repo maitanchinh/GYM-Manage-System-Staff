@@ -6,8 +6,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import fptu.capstone.gymmanagesystemstaff.model.Attendance
 import fptu.capstone.gymmanagesystemstaff.repositories.AttendanceRepository
 import fptu.capstone.gymmanagesystemstaff.utils.DataState
+import fptu.capstone.gymmanagesystemstaff.utils.ErrorHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,10 +23,9 @@ class AttendanceViewModel @Inject constructor(private val attendanceRepository: 
             try {
                 val attendance: Attendance = attendanceRepository.createAttendance(trainerId = trainerId, slotId = slotId)
                 _trainerAttendance.value = DataState.Success(attendance)
-            } catch (e: Exception) {
+            } catch (e: HttpException) {
                 e.printStackTrace()
-                println("Error at createAttendance: ${e.message}")
-                _trainerAttendance.value = DataState.Error(e.message ?: "Unknown error")
+                _trainerAttendance.value = DataState.Error(ErrorHandler(e.code()))
             }
         }
     }

@@ -46,10 +46,10 @@ fun AttendanceScreen(attendanceViewModel: AttendanceViewModel = hiltViewModel())
     LaunchedEffect(attendanceState) {
         if (attendanceState is DataState.Success) {
             val attendance = (attendanceState as DataState.Success).data
-            Toast.makeText(context, "${attendance.member?.name} attended", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "${attendance.trainer?.name} attended", Toast.LENGTH_SHORT).show()
         } else if (attendanceState is DataState.Error) {
             qrCodeContent = ""
-//            Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, (attendanceState as DataState.Error).message, Toast.LENGTH_SHORT).show()
         }
     }
     LaunchedEffect(cameraPermissionState.status.isGranted) {
